@@ -2,16 +2,16 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Client Chat Receipts - find approvals, requests and deadlines in a WhatsApp export (runs in your browser)</title>
 <meta name="description" content="Free tool: load a WhatsApp chat export and get a dated list of approvals, change requests, deadlines and payment mentions. Runs fully in your browser. Nothing is uploaded.">
-<style>body{font:16px/1.5 system-ui,sans-serif;max-width:860px;margin:0 auto;padding:20px;color:#1b1f23}h1{font-size:1.6rem}.box{border:2px dashed #888;border-radius:10px;padding:18px;margin:14px 0}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;padding:6px;text-align:left;vertical-align:top;font-size:.92rem}.tag{display:inline-block;border-radius:6px;padding:1px 7px;font-size:.8rem;background:#eef}button,select{font-size:1rem;padding:6px 12px}small{color:#555}</style></head><body>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:860px;margin:0 auto;padding:20px;color:#1b1f23}h1{font-size:1.6rem}.box{border:2px dashed #888;border-radius:10px;padding:18px;margin:14px 0}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;padding:6px;text-align:left;vertical-align:top;font-size:.92rem}.tag{display:inline-block;border-radius:6px;padding:1px 7px;font-size:.8rem;background:#eef}button,select{font-size:1rem;padding:6px 12px}small{color:#555}.sr{position:absolute;left:-9999px}@media print{.box,button,select,label,#flt{display:none}}</style></head><body>
 <h1>Client Chat Receipts</h1>
 <p>Client said "I never approved that"? Load the exported chat and get a dated list of the lines that look like <b>approvals, change requests, deadlines, payments and scope questions</b>. Free. The chat file is read in your browser and its contents are never sent anywhere. The page only reports anonymous visit and "a file was processed" counts (no text, names or file data).</p>
 <div class="box"><b>1.</b> In WhatsApp: open the chat, More, Export chat, Without media. <b>2.</b> Choose the .txt file here:<br><br>
-<input type="file" id="f" accept=".txt,text/plain"> <small>Date formats like 31/12/2025, 12/31/25 and 31.12.2025 are supported.</small></div>
+<label for="f">WhatsApp export (.txt)</label> <input type="file" id="f" accept=".txt,text/plain"> <small>Date formats like 31/12/2025, 12/31/25 and 31.12.2025 are supported.</small></div>
 <div id="out" hidden>
-<p><span id="sum"></span></p>
-<p>Show: <select id="flt"><option value="all">All matches</option><option value="approval">Approvals</option><option value="negative">Not approved / disagreement</option><option value="request">Change requests</option><option value="deadline">Deadlines</option><option value="payment">Payments</option></select>
-<button id="csv">Download CSV</button> <button id="print">Print / save as PDF</button></p>
-<table><thead><tr><th>Date</th><th>Who</th><th>Type</th><th>Message</th></tr></thead><tbody id="rows"></tbody></table>
+<p><span id="sum" role="status" aria-live="polite"></span></p>
+<p><label for="flt">Show:</label> <select id="flt"><option value="all">All matches</option><option value="approval">Approvals</option><option value="negative">Not approved / disagreement</option><option value="request">Change requests</option><option value="deadline">Deadlines</option><option value="payment">Payments</option></select>
+<button type="button" id="csv">Download CSV</button> <button type="button" id="print">Print / save as PDF</button></p>
+<table><caption class="sr">Matching messages</caption><thead><tr><th scope="col">Date</th><th scope="col">Who</th><th scope="col">Type</th><th scope="col">Message</th></tr></thead><tbody id="rows"></tbody></table>
 </div>
 <p><small>Limits: this is a keyword finder for English messages. It can miss things and flag unrelated lines, and it is not legal evidence or legal advice. Keep the original export. The table replaces links, email addresses and long digit sequences with placeholders, but other personal details in messages are shown as written, and CSV/PDF contain whatever the table shows.</small></p>
 
